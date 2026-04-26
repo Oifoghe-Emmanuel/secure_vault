@@ -20,4 +20,4 @@
 
 **CDN:**
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Oifoghe-Emmanuel/secure-vault@main/secure-vault.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oifoghe-Emmanuel/secure-vault@main/secure_vault.js"></script>

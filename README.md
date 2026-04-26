@@ -1,6 +1,6 @@
 # SecureVault.js
 
-**Zero-dependency 3-of-5 crypto vault for the web.** Split secrets across devices. Recover with any 3 shares. 6-hour brute-force protection.
+**Zero-dependency crypto vault for the web.** Supports Solo, Pair, and 3-of-5 recovery. Secure Enclave + 6-hour rate limit.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Size](https://img.shields.io/badge/Size-12KB-blue.svg)]()
@@ -8,16 +8,16 @@
 
 ### Features
 
-- **3-of-5 Shamir Secret Sharing** - Same math as Coinbase Custody
-- **Secure Enclave Support** - Face ID / Touch ID on iOS/Android
-- **6 Hour Rate Limit** - Auto-lock after 5 failed attempts
-- **SHA-256 Integrity Check** - Prevents wrong secret reconstruction
-- **Zero Dependencies** - 1 file. No npm. No build step.
-- **Works Offline** - All crypto runs in browser
-- **~12KB Minified** - Faster than jQuery
+- **3 Recovery Modes:** Solo 1-of-1, Pair 2-of-2, or 3-of-5 Shamir
+- **Secure Enclave:** Face ID / Touch ID / Windows Hello where available
+- **6 Hour Lockout:** Auto-lock after 5 failed unlock attempts
+- **SHA-256 Integrity:** Prevents wrong secret from partial shares
+- **Zero Dependencies:** 1 file. No npm. No build step.
+- **12KB Minified:** Works offline, runs in any browser
+- **Alpha Pattern:** All modes use same Shamir SSS engine
 
 ### Install
 
 **CDN:**
 ```html
-<script src="https://cdn.jsdelivr.net/gh/yourusername/secure-vault@main/secure-vault.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oifoghe-Emmanuel/secure-vault@main/secure-vault.js"></script>

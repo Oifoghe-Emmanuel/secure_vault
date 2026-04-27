@@ -9,7 +9,7 @@ Solo, Pair, and 3-of-5 recovery with WebAuthn + 6-hour lockout.
 
 ## 🎓 My Story
 
-I’m Emmanuel, 19, from Enugu, Nigeria. 
+I’m Emmanuel Oifoghe, 19, from Delta, Nigeria. 
 
 I missed Dartmouth’s 2025 deadline for Thayer School of Engineering, but I didn’t wait. I taught myself WebCrypto and built SecureVault.js in 2 weeks to prove I can learn real-world cryptography.
 

@@ -1,10 +1,10 @@
-## SecureVault v6.4.1 - Alpha Pattern™
+# SecureVault v6.4.1 - Alpha Pattern™
 
 **Zero-Knowledge Password Vault with Mathematically Secure Backup**
 
-Invented by Emmanuel Oifoghe, 2026. Agbarho, Nigeria.
+**Alpha Pattern™** - A name I created for teaching AES-GCM random IVs. Invented by Emmanuel Oifoghe, 2026.
 
-Sponsor
+## Sponsor
 
 **To support financially and to Dartmouth college:** https://paystack.shop/pay/h9wvwzrcg3
 
@@ -19,16 +19,16 @@ Thank you for believing in real crypto from Nigeria.
 
 ## What is Alpha Pattern™?
 
-**Alpha Pattern** = Same data encrypts differently every time.
+**Alpha Pattern** = A beginner-friendly name for AES-GCM encryption with hardware-random IVs.
 
 Example: Letter 'J'
 - Day 1: J → `22568fed039bf98e...`
 - Day 2: J → `9196cc88331ce795...`
 
 **Why:** Each encrypt uses a new random IV from `crypto.getRandomValues(12)`  
-**Result:** Hackers can't find patterns. Even if they steal your database.
+**Result:** Same plaintext encrypts differently every time. This is called IND-CPA security.
 
-This replaces old "A=J today, A=Z tomorrow" hiding. Now it's real math.
+I created this name to teach my brother in Agbarho why "A=J today, A=Z tomorrow" matters. The math is standard AES-GCM. The name Alpha Pattern is mine.
 
 ---
 
@@ -39,8 +39,9 @@ This replaces old "A=J today, A=Z tomorrow" hiding. Now it's real math.
 - **Server sees only:** `verifier` hash. Server never sees password or master key
 - **If server hacked:** Attackers get useless hashes, not your passwords
 
-### 2. Alpha Pattern™ AES-256-GCM
-- **Unique IV per encrypt** → `crypto.getRandomValues(12)`
+### 2. Alpha Pattern™ Implementation
+- **Uses AES-256-GCM** → Industry standard encryption
+- **Unique IV per encrypt** → `crypto.getRandomValues(12)` ensures Alpha Pattern behavior
 - **IND-CPA Secure** → Same plaintext = different ciphertext every time
 - **OWASP Compliant** → PBKDF2 600,000 iterations
 
@@ -110,27 +111,27 @@ const recovered = await SecureVault.unlockPairUniversal(
 
 ## Security Properties Proven by Tests
 
-| Attack          | Protection                                      | Test                                      |
-|----------------|--------------------------------------------------|-------------------------------------------|
-| Database leak  | Alpha Pattern: Random IV per encrypt             | Same J = different ciphertext             |
-| Password leak  | Zero-knowledge: Key in Secure Enclave            | No plaintext in storage                   |
-| Phone lost     | Shamir 3-of-5: Recover with paper + cloud + brother | 3 shares unlock                       |
-| Brute force    | 6 hour lockout after 5 tries                     | Rate limit triggers                       |
-| IV reuse bug   | IV stored with ciphertext, extracted correctly   | Decrypted key matches                     |
+| Attack            | Protection                                      | Test                                      |
+|------------------|------------------------------------------------|-------------------------------------------|
+| Database leak     | Alpha Pattern: Random IV per encrypt           | Same J = different ciphertext             |
+| Password leak     | Zero-knowledge: Key in Secure Enclave          | No plaintext in storage                   |
+| Phone lost        | Shamir 3-of-5: Recover with paper + cloud + brother | 3 shares unlock                    |
+| Brute force       | 6 hour lockout after 5 tries                   | Rate limit triggers                       |
+| IV reuse bug      | IV stored with ciphertext, extracted correctly | Decrypted key matches                     |
 
 ---
 
-## How It's Better Than v1.0 (Dec 2025)
+## How It's Better Than v1.0 Dec 2025
 
-| Dec 2025 - Failed         | v6.4.1 - Alpha Pattern              |
-|---------------------------|-------------------------------------|
-| Caesar cipher + Base64   | AES-256-GCM with random IV         |
-| Password in localStorage | Zero-knowledge via WebAuthn        |
-| No backup                | Shamir 3-of-5 mathematically secure|
-| No rate limit            | 6 hour lockout                     |
-| Static IV = broken       | Alpha Pattern = unbreakable        |
+| Dec 2025 - Failed            | v6.4.1 - Alpha Pattern                |
+|-----------------------------|--------------------------------------|
+| Caesar cipher + Base64      | AES-256-GCM with Alpha Pattern       |
+| Password in localStorage    | Zero-knowledge via WebAuthn          |
+| No backup                   | Shamir 3-of-5 mathematically secure  |
+| No rate limit               | 6 hour lockout                       |
+| Static IV = broken          | Random IV = IND-CPA secure           |
 
-**Lesson:** Security comes from math, not hiding. One line - static IV - destroys AES-GCM. Fixed in v6.4.1.
+**Lesson:** Security comes from math, not hiding. One line - static IV - destroys AES-GCM. Fixed in v6.4.1 using standard crypto.
 
 ---
 
@@ -171,4 +172,4 @@ GitHub: Oifoghe-Emmanuel
 
 ---
 
-*Alpha Pattern™ - Invented 2026. Same data, different every time.*
+_Alpha Pattern™ - A name I created for teaching AES-GCM random IVs. Invented 2026._

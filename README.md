@@ -6,7 +6,8 @@
 
 ## Sponsor
 
-**To support financially and to Dartmouth college:** https://paystack.shop/pay/h9wvwzrcg3
+**To support financially and to Dartmouth college:** 
+https://github.com/sponsors/Oifoghe-Emmanuel/button
 
 Your support helps:
 1. **Build SecureVault v6.5** with Device Binding 2FA
@@ -168,7 +169,8 @@ Emmanuel Oifoghe
 Agbarho, Delta State, Nigeria  
 GitHub: Oifoghe-Emmanuel  
 
-**Sponsor:** https://paystack.shop/pay/h9wvwzrcg3
+**Sponsor:** 
+https://github.com/sponsors/Oifoghe-Emmanuel/button
 
 ---
 

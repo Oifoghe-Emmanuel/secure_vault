@@ -1,35 +1,37 @@
-# SecureVault v6.4.1 - Alpha Pattern™
-
+# SecureVault - Alpha Pattern™
 **Zero-Knowledge Password Vault with Mathematically Secure Backup**
 
-**Alpha Pattern™** - A name I created for teaching AES-GCM random IVs. Invented by Emmanuel Oifoghe, 2026.
+**[Live Demo](https://oifoghe-emmanuel.github.io/secure-photos-pwa)** | 
+**[Source Code](https://github.com/oifoghe-emmanuel/secure-photos-pwa)**
 
-## Sponsor
+**Alpha Pattern™** - A teaching name for AES-GCM encryption with hardware-random IVs.  
+The math is standard AES-GCM. Created by Emmanuel Oifoghe.
 
-**To support financially and to Dartmouth college:** 
-https://github.com/sponsors/Oifoghe-Emmanuel/button
+## Sponsor SecureVault
+Your sponsorship keeps this project 100% open source and funds:
+1. **Device Binding 2FA** - making offline-first vaults safer for activists and students
+2. **Security audits & docs** - so students worldwide can learn real crypto
+3. **Open-source maintenance** - no paywalls, no tracking
 
-Your support helps:
-1. **Build SecureVault v6.5** with Device Binding 2FA
-2. **Fund my Dartmouth College** CS undergrad application Jan 2027
-3. **Keep Alpha Pattern open source** for students worldwide
+Sponsors also help me attend Dartmouth College CS in Jan 2027 to bring this work to more students.
+
+**Sponsor here:** https://github.com/sponsors/Oifoghe-Emmanuel
 
 Thank you for believing in real crypto from Nigeria.
 
 ---
 
 ## What is Alpha Pattern™?
+**Alpha Pattern** is a beginner-friendly way to explain AES-GCM with random IVs.
 
-**Alpha Pattern** = A beginner-friendly name for AES-GCM encryption with hardware-random IVs.
-
-Example: Letter 'J'
-- Day 1: J → `22568fed039bf98e...`
-- Day 2: J → `9196cc88331ce795...`
+Example: Letter 'J'  
+- Day 1: J → `22568fed039bf98e...`  
+- Day 2: J → `9196cc88331ce795...`  
 
 **Why:** Each encrypt uses a new random IV from `crypto.getRandomValues(12)`  
 **Result:** Same plaintext encrypts differently every time. This is called IND-CPA security.
 
-I created this name to teach my brother in Agbarho why "A=J today, A=Z tomorrow" matters. The math is standard AES-GCM. The name Alpha Pattern is mine.
+I created this name to teach my brother in Agbarho why "A=J today, A=Z tomorrow" matters.
 
 ---
 
@@ -58,14 +60,11 @@ I created this name to teach my brother in Agbarho why "A=J today, A=Z tomorrow"
 - **Password leak alone can't compromise account** → Need device + password
 
 ### 5. Public Security Audit
-
 Run this in any browser console to verify crypto:
-
 ```js
 auditSecureVault()
 // Expected: [7/9] SECURITY CHECKS PASSED
 ```
-
 Why 7/9? The last 2 tests need Face ID/Touch ID. On desktop you see 7/9. On iPhone you see 9/9. All core crypto tests pass on any device.
 
 ---
@@ -90,12 +89,11 @@ const masterKey = login.masterKey; // Use this to encrypt passwords
 
 ### 4. Create Backup
 ```js
-const backup = await SecureVault.createPairUniversal("MySecret", {
-  totalShares: 5,
-  threshold: 3,
-  labels: ["phone","paper","cloud","brother","laptop"]
+const backup = await SecureVault.createPairUniversal("MySecret", { 
+  totalShares: 5, 
+  threshold: 3, 
+  labels: ["phone","paper","cloud","brother","laptop"] 
 });
-
 console.log(backup.shares.paper); // Print this and hide it
 ```
 
@@ -103,7 +101,7 @@ console.log(backup.shares.paper); // Print this and hide it
 ```js
 const recovered = await SecureVault.unlockPairUniversal(
   [share1, share2, share3], // Any 3 shares
-  backup.secretHash,
+  backup.secretHash, 
   "recovery"
 );
 ```
@@ -112,45 +110,43 @@ const recovered = await SecureVault.unlockPairUniversal(
 
 ## Security Properties Proven by Tests
 
-| Attack            | Protection                                      | Test                                      |
-|------------------|------------------------------------------------|-------------------------------------------|
-| Database leak     | Alpha Pattern: Random IV per encrypt           | Same J = different ciphertext             |
-| Password leak     | Zero-knowledge: Key in Secure Enclave          | No plaintext in storage                   |
-| Phone lost        | Shamir 3-of-5: Recover with paper + cloud + brother | 3 shares unlock                    |
-| Brute force       | 6 hour lockout after 5 tries                   | Rate limit triggers                       |
-| IV reuse bug      | IV stored with ciphertext, extracted correctly | Decrypted key matches                     |
+| Attack | Protection | Test |
+|--------|-----------|------|
+| Database leak | Alpha Pattern: Random IV per encrypt | Same J = different ciphertext |
+| Password leak | Zero-knowledge: Key in Secure Enclave | No plaintext in storage |
+| Phone lost | Shamir 3-of-5: Recover with paper + cloud + brother | 3 shares unlock |
+| Brute force | 6 hour lockout after 5 tries | Rate limit triggers |
+| IV reuse bug | IV stored with ciphertext, extracted correctly | Decrypted key matches |
 
 ---
 
-## How It's Better Than v1.0 Dec 2025
+## How It's Better Than Earlier Versions
 
-| Dec 2025 - Failed            | v6.4.1 - Alpha Pattern                |
-|-----------------------------|--------------------------------------|
-| Caesar cipher + Base64      | AES-256-GCM with Alpha Pattern       |
-| Password in localStorage    | Zero-knowledge via WebAuthn          |
-| No backup                   | Shamir 3-of-5 mathematically secure  |
-| No rate limit               | 6 hour lockout                       |
-| Static IV = broken          | Random IV = IND-CPA secure           |
+| Earlier | Now |
+|---------|-----|
+| Caesar cipher + Base64 | AES-256-GCM with Alpha Pattern |
+| Password in localStorage | Zero-knowledge via WebAuthn |
+| No backup | Shamir 3-of-5 mathematically secure |
+| No rate limit | 6 hour lockout |
+| Static IV = broken | Random IV = IND-CPA secure |
 
-**Lesson:** Security comes from math, not hiding. One line - static IV - destroys AES-GCM. Fixed in v6.4.1 using standard crypto.
+**Lesson:** Security comes from math, not hiding. One line - static IV - destroys AES-GCM. Fixed using standard crypto.
 
 ---
 
-## Roadmap v6.5
-
+## Roadmap
 **Device Binding 2FA:** New phone login requires email code. Password leak alone won't compromise accounts. Like Facebook, Google, GTBank.
 
 ---
 
 ## Run The Audit Yourself
-
 ```js
 // Paste in browser console
 auditSecureVault()
 
 // Output:
 // [+] PASS: Alpha Pattern: Same J = different ciphertext
-// [+] PASS: Zero-knowledge: No plaintext in storage  
+// [+] PASS: Zero-knowledge: No plaintext in storage
 // [+] PASS: Shamir 3-of-5: 2 shares fail, 3 shares work
 // [7/9] SECURITY CHECKS PASSED
 ```
@@ -158,20 +154,15 @@ auditSecureVault()
 ---
 
 ## License
-
 MIT - Use it, learn from it, build better.
 
 ---
 
 ## Contact
-
 Emmanuel Oifoghe  
 Agbarho, Delta State, Nigeria  
 GitHub: Oifoghe-Emmanuel  
-
-**Sponsor:** 
-https://github.com/sponsors/Oifoghe-Emmanuel/button
+**Sponsor:** https://github.com/sponsors/Oifoghe-Emmanuel
 
 ---
-
-_Alpha Pattern™ - A name I created for teaching AES-GCM random IVs. Invented 2026._
+_Alpha Pattern™ - A teaching name for AES-GCM random IVs. The math is standard AES-GCM._
